@@ -60,8 +60,7 @@ function hard() {
 
 function initGame() {
 
-    resetVariables()
-    clearInterval(Interval)
+    resetVariables();
     gClickedMineCount = 0;
     gBoard = buildBoard();
     setMinesNegsCount();
@@ -214,7 +213,8 @@ function resetVariables() {
     elLife.innerText = '❤    ❤    ❤';
     elNumsOfFlag.innerText = gLevel.MINES;
     //  מוגדר בנוסף פה כדי שלא יהיו באגים.. כשמתרגל יראה אשאל למה
-    clearInterval(Interval);
+    clearInterval(gStartTimer);
+    elTimer.innerText = 0;
     gGame.secsPassed = 0;
     isFirstClick = false;
     gFlagOnGame = 0;
