@@ -18,16 +18,16 @@ function buildBoard() {
 
         }
     }
-//   יוצרת מוקשים במיקום רנדומלי
+    //   יוצרת מוקשים במיקום רנדומלי
     for (var i = 0; i < gLevel.MINES; i++) {
         var idxI = getRandomIntInclusive(0, gLevel.SIZE - 1);
         var idxJ = getRandomIntInclusive(0, gLevel.SIZE - 1);
         if (board[idxI][idxJ].isMine) return buildBoard();
         board[idxI][idxJ].isMine = true;
     }
-    
     return board;
 
+    
 }
 
 
@@ -60,7 +60,7 @@ function renderBoard(board) {
         for (var j = 0; j < board.length; j++) {
             var cell = '';
 
-            strHTML += `<td id="cell-${i}-${j}" class="design-cell"
+            strHTML += `<td id="cell-${i}-${j}" class="cell"  oncontextmenu="cellMarked(this,${i},${j})"
              onclick="cellClicked(this,${i},${j})" >${cell}</td>`
         }
         strHTML += '</tr>'
@@ -71,7 +71,10 @@ function renderBoard(board) {
 
 function getRandomIntInclusive(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-  
+}
 
-  
+function getSelector(i, j) {
+    return 'cell-' + i + '-' + j;
+}
+
+

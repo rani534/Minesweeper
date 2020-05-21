@@ -1,13 +1,83 @@
-.design-cell{
+.cell{
 width: 40px;
 height: 40px;
 border: 2px solid black;
 text-align: center;
 }
 
-
+ 
 table{
-   
-    margin: auto;
     
+    margin: auto;
+    margin-top: 20px;
+}
+
+button {
+ margin: 10px;
+}
+
+.but {
+    margin: auto;
+    margin-bottom: 10px;
+    text-align: center;
+}
+  
+.life {
+    margin: auto;
+    width: 120px;
+    height: 30px;
+    border: 3px solid  black;
+    border-radius: 12%;
+    text-align: center;
+}
+
+
+
+.show{
+  height:60px;
+    text-align: center;
+    padding: 30px;
+
+    
+}
+.flag{
+    margin: 20px ;
+    display: inline;
+    text-align: center;
+    border-radius: 15%;
+    padding:  5px 40px 5px 1px;
+    border: 3px solid rgb(119, 119, 119);
+}
+
+.smiley{
+    margin: 20px ;
+    display: inline;
+    text-align: center;
+}
+
+.timer{
+    margin: 20px;;
+    text-align: center;
+    display: inline;
+    border-radius: 15%;
+    padding:  5px 40px 5px 1px;
+    border: 3px solid rgb(119, 119, 119);
+}
+
+.Safe-click{
+    color: white;
+    background-color: rgb(37, 225, 250);
+    width: 100px;
+    height: 45px;
+    border:2px solid white ;
+    border-radius: 20%;
+    margin-bottom: 3px;
+}
+
+.chang-color{
+    background-color: rgb(37, 225, 250);
+}
+h5{
+    margin: 2px 0px 20px 25px;
+    margin-top: 0px;
 }

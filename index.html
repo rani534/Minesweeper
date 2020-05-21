@@ -8,21 +8,31 @@
     <title>Minesweeper game</title>
 </head>
 
-<body onload="initGame()">
+<body onload="initGame()" style="background-color: rgb(240, 239, 239);" >
 
 
-    <header>
+    <header style="text-align: center;" >
         <h1>Minesweeper game</h1>
     </header>
+    <button class="Safe-click"  onclick="getSafeCell()">Safe click</button>
+    <h5>3 Safe click<h5>
+    <div class="but">
+        <button onclick="ease()"> ease </button>
+        <button onclick="middle()"> middle </button>
+        <button onclick="hard()"> hard </button>
+    </div>
 
-    <table>
-        <tbody class="game-board" ></tbody>
-    </table>
+    <div class="life"></div> 
 
-
-    <!-- `<td  id="cell-i-j" class="design-cell" onclick="cellClicked(this)" >${cell}</td>` -->
-
-
+    <div class="show">
+        <div class="flag"></div>
+        <div class="smiley" onclick="initGame()">🙂</div>
+        <div class="timer">0</div>
+        <table oncontextmenu="return false">
+            <tbody class="game-board"></tbody>
+        </table>
+    </div>
+   
 
     <script src="js/util.js"></script>
     <script src="js/Minesweeper.js"></script>
