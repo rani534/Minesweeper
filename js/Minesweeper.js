@@ -61,6 +61,7 @@ function hard() {
 function initGame() {
 
     resetVariables()
+    clearInterval(Interval)
     gClickedMineCount = 0;
     gBoard = buildBoard();
     setMinesNegsCount();
