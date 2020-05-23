@@ -152,7 +152,6 @@ function checkGameOver() {
             var id = getSelector(i, j);
             var elCell = document.getElementById(id);
             if ((gBoard[i][j].isMine) && (elCell.innerText === FLAG)) flagOnMines++;
-
         }
     }
     if (flagOnMines === gLevel.MINES && gFlagOnGame === gLevel.MINES) {
