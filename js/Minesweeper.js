@@ -73,16 +73,24 @@ function initGame() {
 
 
 function cellClicked(elCell, i, j) {
-    // לחיצה ראשונה תמיד תהיה לא מוקש
-    // if (!isFirstClick && gBoard[i][j].isMine){   
-    // }
+    //  לחיצה ראשונה תמיד תהיה לא מוקש
+    if (!isFirstClick && gBoard[i][j].isMine) {
+        gBoard = buildBoard();
+        setMinesNegsCount();
+        renderBoard(gBoard);
+        var idxI = i;
+        var idxJ = j;
+        var id = getSelector(idxI, idxJ);
+        var elCellCopy = document.getElementById(id);
+        cellClicked(elCellCopy,idxI, idxJ);
+    }
+    if (!gGame.isOn) return
 
     if (!isFirstClick) {
         gStartTimer = setInterval(Interval, 1000);
         isFirstClick = true;
     }
 
-    if (!gGame.isOn) return
     if (elCell.innerText === FLAG || elCell.innerText === QUESTION_MARK) return;
 
     if (gBoard[i][j].isMine) {
@@ -92,6 +100,7 @@ function cellClicked(elCell, i, j) {
     if (gBoard[i][j].isShown) return
     gBoard[i][j].isShown = true;
     gGame.shownCount++
+    checkGameOver();
 
     elCell.innerText = gBoard[i][j].minesAroundCount;
     elCell.style.backgroundColor = 'rgb(223, 216, 191)';
@@ -105,6 +114,7 @@ function cellClicked(elCell, i, j) {
 
 
 function cellMarked(elCell, i, j) {
+    if (!gGame.isOn) return;
 
     if (!isFirstClick) {
         gStartTimer = setInterval(Interval, 1000);
@@ -115,6 +125,7 @@ function cellMarked(elCell, i, j) {
     if (elCell.innerText === QUESTION_MARK) {
         gBoard[i][j].isMarked = false;
         elCell.innerText = '';
+        checkGameOver();
         return;
     }
 
@@ -140,18 +151,19 @@ function checkGameOver() {
         for (var j = 0; j < gBoard.length; j++) {
             var id = getSelector(i, j);
             var elCell = document.getElementById(id);
-
             if ((gBoard[i][j].isMine) && (elCell.innerText === FLAG)) flagOnMines++;
 
         }
     }
-
     if (flagOnMines === gLevel.MINES && gFlagOnGame === gLevel.MINES) {
         gGame.isOn = false;
         elSmiley.innerText = WIN;
         clearInterval(gStartTimer);
-
-        console.log('victory')
+    }
+    if (gGame.shownCount === (gLevel.SIZE ** 2) - gLevel.MINES) {
+        gGame.isOn = false;
+        elSmiley.innerText = WIN;
+        clearInterval(gStartTimer);
     }
 }
 
@@ -175,7 +187,7 @@ function expandShown(board, posI, posJ) {
 function explode(idxI, indJ) {
 
     if (gClickedMineCount < 2) {
-    //   יש סאונד  תזהרו לא להבהל 
+        //   יש סאונד  תזהרו לא להבהל 
         // audio.play();
         if (gClickedMineCount === 0) elLife.innerText = '❤    ❤ ';
         if (gClickedMineCount === 1) elLife.innerText = '❤';
@@ -207,8 +219,8 @@ function Interval() {
     gGame.secsPassed++
     elTimer.innerText = gGame.secsPassed;
 }
-
 function resetVariables() {
+    gGame.shownCount = 0;
     gCountSafeCell = 0;
     elLife.innerText = '❤    ❤    ❤';
     elNumsOfFlag.innerText = gLevel.MINES;
@@ -223,13 +235,15 @@ function resetVariables() {
 }
 
 function getSafeCell() {
+    if (!gGame.isOn) return;
+
     if (gCountSafeCell > 2) {
         alert('you have no more safe click!');
         return;
     }
     var idxI = getRandomIntInclusive(0, (gBoard.length - 1));
     var idxJ = getRandomIntInclusive(0, (gBoard.length - 1));
-    if (gBoard[idxI][idxJ].isMine ||gBoard[idxI][idxJ].isShown) {
+    if (gBoard[idxI][idxJ].isMine || gBoard[idxI][idxJ].isShown) {
         return getSafeCell();
 
     }
